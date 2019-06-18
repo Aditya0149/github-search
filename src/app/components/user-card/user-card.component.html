@@ -1,3 +1,47 @@
-<p>
-  {{gitUser?.login}}
-</p>
+<div class="card">
+  <div class="row card-body">
+    <div class="avatar col-md-3">
+      <img [src]="gitUser?.avatar_url" class="rounded-circle profile-pic" alt="avatar_url">
+    </div>
+    <div class="details col-md-7">
+      <h4 class="card-title">{{gitUser?.login}}</h4>
+      <p class="card-text">Profile URL : {{gitUser?.url}}</p>
+      <p class="card-text">
+        Type  : {{gitUser?.type}}<br/>
+        Score : {{gitUser?.score}}
+      </p>
+    </div>
+
+    <!-- details button -->
+    <div class="button col-md-2">
+      <button class="btn btn-primary" (click)="showUserRepos(gitUser.login)" >Details</button>
+    </div>
+    
+    <!-- details table -->
+    <table class="table table-striped col-md-12" *ngIf="showGitRepos">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let repo of gitRepos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+          <td>{{repo.name}}</td>
+          <td>{{repo.language}}</td>
+        </tr>
+      </tbody>
+
+      <!-- pagination controls -->
+      <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="gitRepos?.length"></ngb-pagination>
+    
+    </table>
+
+  </div>
+</div>
+
+
+

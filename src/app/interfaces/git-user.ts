@@ -1,3 +1,6 @@
 export interface GitUser {
-    login:string
+    login:string,
+    type:string,
+    url:string,
+    score:number
 }

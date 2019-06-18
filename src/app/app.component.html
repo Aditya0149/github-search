@@ -1,10 +1,33 @@
 <header>
-  <select name="" id=""></select>
-  <input type="search" (keyup)="searchGitUser(search.value)" #search >
+  <div class="wrapper">
+    <!-- sort box  -->
+    <select name="" id="" (change)="sortUsers(sortType.value)" #sortType>
+      <option [value]="option" *ngFor="let option of sortOptions" >{{option}}</option>
+    </select>
+    <!-- sort box -->
+
+    <!-- Search box -->
+    <form class="form-inline active-cyan-4">
+      <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+        aria-label="Search" (keyup)="searchGitUser(search.value)" #search>
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </form>
+    <!-- Search box -->
+   </div> 
 </header>
-<div>Total Count : {{totalCount}}</div>
-<!-- <div class="card" *ngFor="let gitUser of gitUsers">
-  {{gitUser?.login}}
-</div> -->
-<app-user-card [gitUser]="gitUser" *ngFor="let gitUser of gitUsers"></app-user-card>
+
+<div class="wrapper" *ngIf="gitUsers">
+  <div>Total Count : {{totalCount}}</div>
+  
+  <!-- git user component -->
+  <app-user-card [gitUser]="gitUser" *ngFor="let gitUser of gitUsers | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"></app-user-card>
+  <!-- git user component -->
+  
+  <!-- pagination controls -->
+  <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="gitUsers?.length"></ngb-pagination>
+</div>
+
 
