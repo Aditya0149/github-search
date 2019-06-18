@@ -7,12 +7,13 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
-import { from } from 'rxjs';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserCardComponent
+    UserCardComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

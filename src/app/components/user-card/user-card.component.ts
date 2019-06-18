@@ -10,22 +10,27 @@ import { GitRepo } from '../../interfaces/git-repo';
 })
 export class UserCardComponent {
   @Input("gitUser")
-  public gitUser:GitUser;
-  public gitRepos:GitRepo[];
+  public gitUser: GitUser;
+  public gitRepos: GitRepo[];
   //toggle details table
-  public showGitRepos:boolean = false;
+  public showGitRepos: boolean = false;
   // for pagination
-  public pageSize:number = 5;
-  public page:number = 1;
-  constructor(private gitServiceService:GitServiceService) { }
+  public pageSize: number = 5;
+  public page: number = 1;
+  //loader
+  loader: boolean = false;
 
-  public showUserRepos(username:string) {
+  constructor(private gitServiceService: GitServiceService) { }
+
+  public showUserRepos(username: string) {
     // if component already fetched the details dont give server call.
     if (this.gitRepos) this.showGitRepos = !this.showGitRepos;
     else { // call the api only on first click
-      this.gitServiceService.getUserRepos(username).subscribe( data => {
-      this.gitRepos = data;    
-      this.showGitRepos = true;
+      this.loader = true;
+      this.gitServiceService.getUserRepos(username).subscribe(data => {
+        this.gitRepos = data;
+        this.showGitRepos = true;
+        this.loader = false;
       });
     }
   }

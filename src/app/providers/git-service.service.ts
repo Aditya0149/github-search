@@ -12,24 +12,24 @@ const getReposUrl = "https://api.github.com/users/";
   providedIn: 'root'
 })
 export class GitServiceService {
-
-  constructor(private http:HttpClient) { }
+  public errorMessage: string;
+  constructor(private http: HttpClient) { }
   // get git user by search key
-  public getUsers(key:string):Observable<any> {
+  public getUsers(key: string): Observable<any> {
     return this.http.get<any>(`${getUsersUrl}${key}`).pipe(
       catchError(this.handleError<any>('search user'))
     );
   }
   // get all repositories of selected user
-  public getUserRepos(username):Observable<GitRepo[]> {
+  public getUserRepos(username): Observable<GitRepo[]> {
     return this.http.get<GitRepo[]>(`${getReposUrl}${username}/repos`).pipe(
       catchError(this.handleError<any>('get repos'))
     );
   }
-  
-  private handleError<T> (operation = 'operation', result?: T) {
+
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      window.alert(`${operation} failed : ${error.message}`);
+      this.errorMessage = `${operation} failed : ${error.message}`;
       return of(result as T);
     };
   }

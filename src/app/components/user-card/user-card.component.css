@@ -4,3 +4,16 @@
     margin: 0 auto;
     display: inline-block;
 }
+.user-card {
+    margin-bottom: 1rem;
+}
+.button-wrapper {
+    position: relative;
+}
+.details-btn {
+    color: #147abc;
+    border-color: #147abc;
+    position: absolute;
+    bottom: 0;
+    right: 12%;
+}
