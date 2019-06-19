@@ -8,12 +8,14 @@ import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { GitRepoDetailsComponent } from './components/git-repo-details/git-repo-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserCardComponent,
-    LoaderComponent
+    LoaderComponent,
+    GitRepoDetailsComponent
   ],
   imports: [
     BrowserModule,

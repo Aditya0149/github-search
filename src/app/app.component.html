@@ -1,25 +1,24 @@
 <header class="navbar header">
   <div class="wrapper">
-
     <!-- sort box  -->
     <select class="form-control" (change)="sortUsers(sortType.value)" #sortType>
+      <option value="">Sort by</option>
       <option [value]="option" *ngFor="let option of sortOptions">{{option}}</option>
     </select>
-    <!-- sort box -->
-
     <!-- Search box -->
     <input class="form-control" type="text" placeholder="Search" aria-label="Search"
       (keyup)="searchGitUser(search.value)" #search>
     <i class="fas fa-search" aria-hidden="true"></i>
-    <!-- Search box -->
-
   </div>
 </header>
 
-<!-- show loading symbol whiile the complete data is fetched -->
+<!-- show loader icon whiile the api data is fetched -->
 <app-loader [loader]="loader"></app-loader>
-<!-- display message if search result is 0 -->
+
+<!-- show message if search result is 0 -->
 <p *ngIf="gitUsers?.length == 0" style="text-align: center;margin-top: 2rem;">No result found</p>
+
+<!-- show search result if its not empty array and after removing loader icon -->
 <div class="wrapper search-wrapper" *ngIf="gitUsers?.length && !loader">
   <br />
   <strong>Total Count : {{totalCount}}</strong>
@@ -27,13 +26,11 @@
   <!-- git user component -->
   <app-user-card [gitUser]="gitUser"
     *ngFor="let gitUser of gitUsers | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize"></app-user-card>
-  <!-- git user component -->
-
   <!-- pagination controls -->
   <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="gitUsers?.length"></ngb-pagination>
 </div>
 
-
+<!-- for error message display perpose -->
 <ngb-alert [type]="'danger'" *ngIf="gitServiceService.errorMessage" (close)="gitServiceService.errorMessage = ''">
   {{gitServiceService.errorMessage}}
 </ngb-alert>

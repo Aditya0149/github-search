@@ -14,12 +14,8 @@ export class UserCardComponent {
   public gitRepos: GitRepo[];
   //toggle details table
   public showGitRepos: boolean = false;
-  // for pagination
-  public pageSize: number = 5;
-  public page: number = 1;
   //loader
-  loader: boolean = false;
-
+  public loader = false;
   constructor(private gitServiceService: GitServiceService) { }
 
   public showUserRepos(username: string) {

@@ -1,0 +1,27 @@
+<!-- show loading symbol whiile the complete data is fetched -->
+<app-loader [loader]="loader"></app-loader>
+<table class="table table-striped col-md-12">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Language</th>
+        <th scope="col">Issues Count</th>
+        <th scope="col">Stars</th>
+        <th scope="col">Followers</th>
+        <th scope="col">Fork Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let repo of gitRepos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <td>{{repo?.name}}</td>
+        <td>{{repo?.language}}</td>
+        <td>{{repo?.open_issues_count}}</td>
+        <td>{{repo?.stargazers_count}}</td>
+        <td>{{repo?.watchers}}</td>
+        <td>{{repo?.forks_count}}</td>
+      </tr>
+    </tbody>
+    <br />
+    <!-- pagination controls -->
+    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="gitRepos?.length"></ngb-pagination>
+  </table>

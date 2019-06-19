@@ -22,32 +22,32 @@ export class AppComponent implements OnInit {
     this.sortOptions = ["Name (A - Z)", "Name (Z - A)", "Rank ↑", "Rank ↓"];
   }
   public searchGitUser(key: string): any {
+    if (!key) return;
     this.loader = true;
     this.gitServiceService.getUsers(key).subscribe(gitUsers => {
       this.loader = false;
       if (!gitUsers) return;
       //get users array
       this.gitUsers = gitUsers.items;
-      console.log(this.gitUsers);
       this.totalCount = gitUsers.total_count;
     });
   }
   public sortUsers(sortType: string) {
     //if user tries to search before searching.
-    if (!this.gitUsers) return;
+    if (!this.gitUsers || !sortType) return;
     let sortFunction;
     switch (sortType) {
       case "Name (A - Z)":
         sortFunction = (a: any, b: any) => {
-          if (a.login > b.login) return -1;
-          if (a.login < b.login) return 1;
+          if (a.login < b.login) return -1;
+          if (a.login > b.login) return 1;
           return 0;
         }
         break;
       case "Name (Z - A)":
         sortFunction = (a: any, b: any) => {
-          if (a.login < b.login) return -1;
-          if (a.login > b.login) return 1;
+          if (a.login > b.login) return -1;
+          if (a.login < b.login) return 1;
           return 0;
         }
         break;

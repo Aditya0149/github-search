@@ -8,48 +8,19 @@
     <div class="details col-md-7">
       <h4 class="card-title">{{gitUser?.login}}</h4>
       <p class="card-text"><strong>Profile URL : </strong> <a [href]="gitUser?.html_url"
-          target="_blank">{{gitUser?.html_url}}</a></p>
+        target="_blank">{{gitUser?.html_url}}</a></p>
       <p class="card-text">
         <strong>Rating :</strong> {{gitUser?.score}}<br />
         <strong>Type :</strong> {{gitUser?.type}}
       </p>
     </div>
-
-    <!-- details button -->
+    <!-- show repo details button -->
     <div class="button-wrapper col-md-2">
       <button class="btn details-btn" (click)="showUserRepos(gitUser.login)"
         [disabled]="loader">{{ showGitRepos ? 'Collapse' : 'Details'}}</button>
     </div>
   </div>
-  <!-- show loading symbol whiile the complete data is fetched -->
-  <app-loader [loader]="loader"></app-loader>
+  
   <!-- details table -->
-  <table class="table table-striped col-md-12" *ngIf="showGitRepos">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Language</th>
-        <th scope="col">Issues Count</th>
-        <th scope="col">Stars</th>
-        <th scope="col">Followers</th>
-        <th scope="col">Fork Count</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let repo of gitRepos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-        <td>{{repo?.name}}</td>
-        <td>{{repo?.language}}</td>
-        <td>{{repo?.open_issues_count}}</td>
-        <td>{{repo?.stargazers_count}}</td>
-        <td>{{repo?.watchers}}</td>
-        <td>{{repo?.forks_count}}</td>
-      </tr>
-    </tbody>
-    <br />
-    <!-- pagination controls -->
-    <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="gitRepos?.length"></ngb-pagination>
-
-  </table>
-
-
+  <app-git-repo-details [gitRepos]="gitRepos" [loader]="loader" *ngIf="showGitRepos" ></app-git-repo-details>
 </div>
