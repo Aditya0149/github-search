@@ -14,6 +14,16 @@
 .header .wrapper select {
     width: 30%;
 }
-.header .wrapper input {
+.header .wrapper .search_box {
     width: 50%;
+    position: relative;
+}
+.search_box i {
+    position: absolute;
+    right: 3%;
+    top: 32%;
+    pointer-events: none;
+}
+.search_box input:focus + i {
+    filter: opacity(0.5);
 }

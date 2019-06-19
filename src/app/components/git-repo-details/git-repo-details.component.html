@@ -14,7 +14,7 @@
     <tbody>
       <tr *ngFor="let repo of gitRepos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
         <td>{{repo?.name}}</td>
-        <td>{{repo?.language}}</td>
+        <td>{{repo?.language ? "Not mentioned" : repo?.language}}</td>
         <td>{{repo?.open_issues_count}}</td>
         <td>{{repo?.stargazers_count}}</td>
         <td>{{repo?.watchers}}</td>

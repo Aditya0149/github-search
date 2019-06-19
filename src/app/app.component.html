@@ -6,9 +6,11 @@
       <option [value]="option" *ngFor="let option of sortOptions">{{option}}</option>
     </select>
     <!-- Search box -->
-    <input class="form-control" type="text" placeholder="Search" aria-label="Search"
-      (keyup)="searchGitUser(search.value)" #search>
-    <i class="fas fa-search" aria-hidden="true"></i>
+    <div class="search_box">
+      <input class="form-control" type="text" placeholder="Search a Github user" aria-label="Search"
+        (keyup)="searchGitUser(search.value)" #search>
+      <i class="fas fa-search" aria-hidden="true"></i>
+      </div>
   </div>
 </header>
 
